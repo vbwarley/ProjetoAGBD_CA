@@ -1,5 +1,7 @@
 package Negocios;
 
+import java.util.List;
+
 public class Curso {
 	
 	private Integer codigo;
@@ -7,6 +9,7 @@ public class Curso {
 	private String descricaoConteudo;
 	private Double valor;
 	private Integer limite;
+	private List<Turma> turmas;
 	
 	public Curso() {
 
@@ -50,6 +53,14 @@ public class Curso {
 
 	public void setLimite(Integer limite) {
 		this.limite = limite;
+	}
+
+	public List<Turma> getTurmas() {
+		return turmas;
+	}
+
+	public void setTurmas(List<Turma> turmas) {
+		this.turmas = turmas;
 	}
 	
 }

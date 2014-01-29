@@ -12,6 +12,7 @@ public class Aluno {
 	private String bairro;
 	private Integer cidade;
 	private String UF;
+	private Telefone telefone;
 	
 	public Aluno() {
 		
@@ -87,6 +88,14 @@ public class Aluno {
 
 	public void setUF(String uF) {
 		UF = uF;
+	}
+
+	public Telefone getTelefone() {
+		return telefone;
+	}
+
+	public void setTelefone(Telefone telefone) {
+		this.telefone = telefone;
 	}
 	
 }

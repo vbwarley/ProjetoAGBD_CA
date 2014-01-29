@@ -10,6 +10,8 @@ public class Turma {
 	private Time horaInicio;
 	private Time horaTermino;
 	private char turno;
+	private Curso curso;
+	private Professor professor;
 	
 	public Turma() {
 		
@@ -61,6 +63,22 @@ public class Turma {
 
 	public void setTurno(char turno) {
 		this.turno = turno;
+	}
+
+	public Curso getCurso() {
+		return curso;
+	}
+
+	public void setCurso(Curso curso) {
+		this.curso = curso;
+	}
+
+	public Professor getProfessor() {
+		return professor;
+	}
+
+	public void setProfessor(Professor professor) {
+		this.professor = professor;
 	}
 	
 }
