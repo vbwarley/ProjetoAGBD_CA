@@ -1,5 +1,7 @@
 package Negocios;
 
+import java.sql.Date;
+import java.sql.Time;
 import java.util.ArrayList;
 
 public class Fachada {
@@ -36,6 +38,33 @@ public class Fachada {
 	}
 
 	public void excluirCurso(Integer codigo) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void cadastrarTurma(Date dataInicio, Date dataTermino,
+			Time horaInicio, Time horaTermino, char turno) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void alterarTurma(Date dataInicio, Date dataTermino,
+			Time horaInicio, Time horaTermino, char turno) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public boolean consultarTurma(Integer codigo) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	public String consultarTurmas() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void excluirTurma(Integer codigo) {
 		// TODO Auto-generated method stub
 		
 	}

@@ -1,5 +1,8 @@
 package Interface;
 
+import java.sql.Date;
+import java.sql.Time;
+
 import javax.swing.JOptionPane;
 
 import Negocios.Fachada;
@@ -101,7 +104,7 @@ public class InterfaceUsuario {
 	}
 		
 	public static void cadastrarCurso() {
-		JOptionPane.showMessageDialog(null,"Para cadastrar/alterar um curso você deve preencher os campos que aparecerão a seguir.");
+		JOptionPane.showMessageDialog(null,"Para cadastrar um curso você deve preencher os campos que aparecerão a seguir.");
 		
 		String nome = JOptionPane.showInputDialog("Digite o nome do curso: ").toString();
 		String descricao = JOptionPane.showInputDialog("Digite a descrição do conteúdo: ").toString();
@@ -139,26 +142,57 @@ public class InterfaceUsuario {
 	}
 	
 	public static void excluirCurso() {
-		Integer codigo = Integer.parseInt(JOptionPane.showInputDialog("Para excluir algum curso você precisa digitar o código. Se existir, você poderá alterar: "
+		Integer codigo = Integer.parseInt(JOptionPane.showInputDialog("Para excluir algum curso você precisa digitar o código. Se existir, você poderá excluir: "
 				+ "\n\nDigite o código: ").toString());
 		
 		Fachada.getInstance().excluirCurso(codigo);
 	}
 	
 	public static void cadastrarTurma() {
+		JOptionPane.showMessageDialog(null,"Para cadastrar uma turma você deve preencher os campos que aparecerão a seguir.");
 		
+		Date dataInicio = Date.valueOf(JOptionPane.showInputDialog("Digite o data de de inicio turma: ").toString());
+		Date dataTermino = Date.valueOf(JOptionPane.showInputDialog("Digite a data de termino: ").toString());
+		Time horaInicio = Time.valueOf(JOptionPane.showInputDialog("Digite a hora de inicio: ").toString());
+		Time horaTermino = Time.valueOf(JOptionPane.showInputDialog("Digite a hora de termino: ").toString());
+		char turno = JOptionPane.showInputDialog("Digite (M)atutino, (V)espertino ou (N)oturno: ").toString().charAt(0);
+				
+		Fachada.getInstance().cadastrarTurma(dataInicio, dataTermino, horaInicio, horaTermino, turno);
 	}
 	
 	public static void alterarTurma() {
+		Integer codigo = Integer.parseInt(JOptionPane.showInputDialog("Para alterar alguma turma você precisa digitar o código. Se existir, você poderá alterar: "
+				+ "\n\nDigite o código: ").toString());
 		
+		if (Fachada.getInstance().consultarTurma(codigo)) {
+			JOptionPane.showMessageDialog(null, "A turma é válida. Para alterá-la, preencha os campos que aparecerão.");
+			
+			Date dataInicio = Date.valueOf(JOptionPane.showInputDialog("Digite o data de de inicio turma: ").toString());
+			Date dataTermino = Date.valueOf(JOptionPane.showInputDialog("Digite a data de termino: ").toString());
+			Time horaInicio = Time.valueOf(JOptionPane.showInputDialog("Digite a hora de inicio: ").toString());
+			Time horaTermino = Time.valueOf(JOptionPane.showInputDialog("Digite a hora de termino: ").toString());
+			char turno = JOptionPane.showInputDialog("Digite (M)atutino, (V)espertino ou (N)oturno: ").toString().charAt(0);
+			
+			Fachada.getInstance().alterarTurma(dataInicio, dataTermino, horaInicio, horaTermino, turno);
+		}		
 	}
 	
 	public static void consultarTurmas() {
+		JOptionPane.showMessageDialog(null, "Assim que você clicar em OK, aparecerão as turmas cadastrados.");
 		
+		String turmas = Fachada.getInstance().consultarTurmas();
+		
+		if (turmas.isEmpty())
+			JOptionPane.showMessageDialog(null, "Não há turmas cadastradas.");
+		else
+			JOptionPane.showMessageDialog(null, turmas);
 	}
 	
 	public static void excluirTurma() {
+		Integer codigo = Integer.parseInt(JOptionPane.showInputDialog("Para excluir alguma turma você precisa digitar o código. Se existir, você poderá excluir: "
+				+ "\n\nDigite o código: ").toString());
 		
+		Fachada.getInstance().excluirTurma(codigo);
 	}
 	
 	public static void main(String[] args) {
