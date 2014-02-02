@@ -5,7 +5,7 @@ import java.sql.Time;
 
 import javax.swing.JOptionPane;
 
-import model.Fachada;
+import control.dao.Fachada;
 
 public class InterfaceUsuario {
 	
