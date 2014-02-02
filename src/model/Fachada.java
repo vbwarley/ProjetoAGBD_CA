@@ -5,9 +5,9 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
-import dao.CursoDAO;
-import dao.ProfessorDAO;
-import dao.TurmaDAO;
+import control.dao.CursoDAO;
+import control.dao.ProfessorDAO;
+import control.dao.TurmaDAO;
 
 public class Fachada {
 	private static Fachada instance = new Fachada();
