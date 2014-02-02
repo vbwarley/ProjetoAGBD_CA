@@ -1,5 +1,167 @@
 package Interface;
 
-public class InterfaceUsuario {
+import javax.swing.JOptionPane;
 
+import Negocios.Fachada;
+
+public class InterfaceUsuario {
+	
+	public static void menu() {
+		int opcao = Integer.parseInt(JOptionPane.showInputDialog(null, "Olá, você está usando o sistema para manuntenção de cursos de aperfeiçoamento."
+				+ "\n\nPor favor, selecione alguma das opções abaixo: "
+				+ "\n1. Manter curso"
+				+ "\n2. Manter turma"
+				+ "\n0. Sair...\n\n").toString());
+		
+		switch (opcao) {
+		case 1:
+			manterCurso();
+			break;
+		case 2:
+			manterTurma();
+			break;
+		case 0:
+			System.exit(0);
+		default:
+			JOptionPane.showMessageDialog(null, "Opcão inválida!");
+			menu();
+			break;
+		}
+		
+	}
+	
+	public static void manterCurso() {
+		int opcao = Integer.parseInt(JOptionPane.showInputDialog(null, "\tMenu Manter Cursos\t."
+				+ "\n\nPor favor, selecione alguma das opções abaixo: "
+				+ "\n1. Cadastrar"
+				+ "\n2. Alterar"
+				+ "\n3. Consultar"
+				+ "\n4. Excluir"
+				+ "\n0. Voltar...\n\n").toString());
+		
+		switch (opcao) {
+		case 1:
+			cadastrarCurso();
+			manterCurso();
+			break;
+		case 2:
+			alterarCurso();
+			manterCurso();
+			break;
+		case 3:
+			consultarCursos();
+			manterCurso();
+			break;
+		case 4:
+			excluirCurso();
+			manterCurso();
+			break;
+		case 0:
+			menu();
+		default:
+			JOptionPane.showMessageDialog(null, "Opcão inválida!");
+			manterCurso();
+			break;
+		}
+	}
+	
+	public static void manterTurma() {
+		int opcao = Integer.parseInt(JOptionPane.showInputDialog(null, "\tMenu Manter Turmas\t."
+				+ "\n\nPor favor, selecione alguma das opções abaixo: "
+				+ "\n1. Cadastrar"
+				+ "\n2. Alterar"
+				+ "\n3. Consultar"
+				+ "\n4. Excluir"
+				+ "\n0. Voltar...\n\n").toString());
+		
+		switch (opcao) {
+		case 1:
+			cadastrarTurma();
+			manterTurma();
+			break;
+		case 2:
+			alterarTurma();
+			manterTurma();
+			break;
+		case 3:
+			consultarTurmas();
+			manterTurma();
+			break;
+		case 4:
+			excluirTurma();
+			manterTurma();
+			break;
+		case 0:
+			menu();
+		default:
+			JOptionPane.showMessageDialog(null, "Opcão inválida!");
+			manterTurma();
+			break;
+		}
+	}
+		
+	public static void cadastrarCurso() {
+		JOptionPane.showMessageDialog(null,"Para cadastrar/alterar um curso você deve preencher os campos que aparecerão a seguir.");
+		
+		String nome = JOptionPane.showInputDialog("Digite o nome do curso: ").toString();
+		String descricao = JOptionPane.showInputDialog("Digite a descrição do conteúdo: ").toString();
+		Double valor = Double.parseDouble(JOptionPane.showInputDialog("Digite o valor do curso: ").toString());
+		Integer limite = Integer.parseInt(JOptionPane.showInputDialog("Digite o limite de turmas: ").toString());
+		
+		Fachada.getInstance().cadastrarCurso(nome, descricao, valor, limite);		
+	}
+	
+	public static void alterarCurso() {
+		Integer codigo = Integer.parseInt(JOptionPane.showInputDialog("Para alterar algum curso você precisa digitar o código. Se existir, você poderá alterar: "
+				+ "\n\nDigite o código: ").toString());
+		
+		if (Fachada.getInstance().consultarCurso(codigo)) {
+			JOptionPane.showMessageDialog(null, "O curso é válido. Para alterá-lo, preencha os campos que aparecerão.");
+			
+			String nome = JOptionPane.showInputDialog("Digite o nome do curso: ").toString();
+			String descricao = JOptionPane.showInputDialog("Digite a descrição do conteúdo: ").toString();
+			Double valor = Double.parseDouble(JOptionPane.showInputDialog("Digite o valor do curso: ").toString());
+			Integer limite = Integer.parseInt(JOptionPane.showInputDialog("Digite o limite de turmas: ").toString());
+			
+			Fachada.getInstance().alterarCurso(codigo, nome, descricao, valor, limite);	
+		}		
+	}
+	
+	public static void consultarCursos() {
+		JOptionPane.showMessageDialog(null, "Assim que você clicar em OK, aparecerão os cursos cadastrados.");
+		
+		String cursos = Fachada.getInstance().consultarCursos();
+		
+		if (cursos.isEmpty())
+			JOptionPane.showMessageDialog(null, "Não há cursos cadastrados.");
+		else
+			JOptionPane.showMessageDialog(null, cursos);
+	}
+	
+	public static void excluirCurso() {
+		Integer codigo = Integer.parseInt(JOptionPane.showInputDialog("Para excluir algum curso você precisa digitar o código. Se existir, você poderá alterar: "
+				+ "\n\nDigite o código: ").toString());
+		
+		Fachada.getInstance().excluirCurso(codigo);
+	}
+	
+	public static void cadastrarTurma() {
+		
+	}
+	
+	public static void alterarTurma() {
+		
+	}
+	
+	public static void consultarTurmas() {
+		
+	}
+	
+	public static void excluirTurma() {
+		
+	}
+	
+	public static void main(String[] args) {
+		menu();
+	}
 }
