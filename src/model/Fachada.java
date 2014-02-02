@@ -11,11 +11,11 @@ import control.dao.TurmaDAO;
 
 public class Fachada {
 	private static Fachada instance = new Fachada();
-	
+
 	public Fachada() {
-		
+
 	}
-	
+
 	public static Fachada getInstance() {
 		return instance;
 	}
@@ -40,12 +40,12 @@ public class Fachada {
 	public String consultarCursos() {
 		List<Curso> cursos = new ArrayList<Curso>();
 		List<Turma> turmas = new ArrayList<Turma>();
-		
+
 		cursos = new CursoDAO().consultar();
 		turmas = new TurmaDAO().consultar();
-				
+
 		String cmostrar = "";
-		
+
 		for (Curso c : cursos) 
 			cmostrar += c.toString();
 			// se existir alguma turma
@@ -64,7 +64,7 @@ public class Fachada {
 			else
 				cmostrar += 0;
 			cmostrar += "\n\n-------------------\n\n";
-		
+
 		return cmostrar;
 	}
 
@@ -76,24 +76,24 @@ public class Fachada {
 
 	public void cadastrarTurma(Integer codigoCurso, Date dataInicio, Date dataTermino,
 			Time horaInicio, Time horaTermino, char turno, Integer codigoProfessor) {
-		
+
 		Turma turma = new Turma(new CursoDAO().consultar(codigoCurso), dataInicio, dataTermino, horaInicio, horaTermino, turno,
 				new ProfessorDAO().consultar(codigoProfessor));
-		
+
 		new TurmaDAO().cadastrar(turma);	
-		
+
 	}
 
 	public void alterarTurma(Integer codigo, Integer codigoCurso, Date dataInicio, Date dataTermino,
 			Time horaInicio, Time horaTermino, char turno, Integer codigoProfessor) {
-		
+
 		Turma turma = new Turma(new CursoDAO().consultar(codigoCurso), dataInicio, dataTermino, horaInicio, horaTermino, turno,
 				new ProfessorDAO().consultar(codigoProfessor));
-		
+
 		turma.setCodigo(codigo);
-		
+
 		new TurmaDAO().alterar(turma);
-		
+
 	}
 
 	public boolean consultarTurma(Integer codigo) {
@@ -102,14 +102,14 @@ public class Fachada {
 
 	public String consultarTurmas() {
 		List<Turma> turmas = new ArrayList<Turma>();
-		
+
 		turmas = new TurmaDAO().consultar();
-				
+
 		String tmostrar = "";
-		
+
 		for (Turma t : turmas) 
 			tmostrar += t.toString() + "\n\n----------------------\n\n";
-			
+
 		return tmostrar;
 	}
 
@@ -117,6 +117,6 @@ public class Fachada {
 		TurmaDAO tdao = new TurmaDAO();
 		Turma turma = tdao.consultar(codigo);
 		tdao.excluir(turma);
-		
+
 	}
 }
