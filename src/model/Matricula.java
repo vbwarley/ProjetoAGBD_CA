@@ -8,6 +8,10 @@ public class Matricula {
 	private Turma turma;
 	private Aluno aluno;
 	
+	public Matricula(Aluno aluno, Turma turma, Date data, double valorPago){
+		
+	}
+	
 	public Turma getTurma() {
 		return turma;
 	}

@@ -45,6 +45,8 @@ public class AlunoDAO {
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
+		
+		new TelefoneDAO().cadastrar(aluno.getTelefone(), aluno.getCpf());
 	}
 	
 	public Aluno consultar(Integer cpf) {
@@ -58,7 +60,7 @@ public class AlunoDAO {
 			ResultSet rs = stmt.executeQuery();
 						
 			if (rs.next()) { //Lembrar de ajeitar o telefone
-				Aluno aluno = new Aluno(cpf, rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getString(10), new Telefone());
+				Aluno aluno = new Aluno(cpf, rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getString(10));
 				
 				stmt.close();
 				return aluno;
@@ -106,8 +108,10 @@ public class AlunoDAO {
 				ResultSet rs = stmt.executeQuery();
 
 				while (rs.next()) { //Lembrar de alterar o Telefone
-					Aluno aluno = new Aluno(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getString(10), new Telefone());
-
+					Aluno aluno = new Aluno(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getString(10));
+				
+					aluno.setTelefone(new TelefoneDAO().consultar(rs.getInt(1)));
+					
 					alunos.add(aluno);
 				}
 

@@ -1,6 +1,8 @@
 package model;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Aluno {
 	private Integer cpf;
@@ -13,11 +15,11 @@ public class Aluno {
 	private Integer cep;
 	private String cidade;
 	private String UF;
-	private Telefone telefone;
+	private List<Telefone> telefone;
 	private Turma turma;
 	
 	public Aluno(int cpf, String nome, String dataNascimento, String logradouro, int numero,
-			String complemento, String bairro, String cidade, int cep, String uf, Telefone telefone) {
+			String complemento, String bairro, String cidade, int cep, String uf) {
 		
 	}
 
@@ -93,12 +95,20 @@ public class Aluno {
 		UF = uF;
 	}
 
-	public Telefone getTelefone() {
+	public List<Telefone> getTelefone() {
 		return telefone;
 	}
 
-	public void setTelefone(Telefone telefone) {
+	public void setTelefone(List<Telefone> telefone) {
 		this.telefone = telefone;
+	}
+
+	public Turma getTurma() {
+		return turma;
+	}
+
+	public void setTurma(Turma turma) {
+		this.turma = turma;
 	}
 
 	public Integer getCep() {
@@ -107,6 +117,10 @@ public class Aluno {
 
 	public void setCep(Integer cep) {
 		this.cep = cep;
+	}
+	
+	public void addTelefone(Telefone telefone){
+		this.telefone.add(telefone);
 	}
 	
 }

@@ -33,7 +33,8 @@ public class InterfaceUsuario {
 			manterAluno();
 			break;
 		case 5:
-			manterProfessor();
+			matricularAluno();
+			menu();
 			break;
 		case 0:
 			System.exit(0);
@@ -206,7 +207,8 @@ public class InterfaceUsuario {
 		String uf = JOptionPane.showInputDialog("Digite a abreviatura da UF onde o aluno mora (ex.: AL)");
 		
 		Fachada.getInstance().cadastrarAluno(cpf, nome, dataNascimento, dddTelefone, telefone, tipo, logradouro, numero, 
-				complemento, bairro, cidade, cep, uf);		
+				complemento, bairro, cidade, cep, uf);
+		JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucesso");
 	}
 	
 	public static void alterarAluno() {
@@ -248,6 +250,30 @@ public class InterfaceUsuario {
 			JOptionPane.showMessageDialog(null, "Não há alunos cadastrados.");
 		else
 			JOptionPane.showMessageDialog(null, alunos);
+	}
+	
+	public static void matricularAluno(){
+		
+		int cpf = Integer.parseInt(JOptionPane.showInputDialog("Digite o cpf do aluno a ser matriculado: ").toString());
+		
+		if (Fachada.getInstance().consultarAluno(cpf)){
+			int codigo = Integer.parseInt(JOptionPane.showInputDialog("Digite o c�digo da turma").toString());
+			if (Fachada.getInstance().consultarTurma(codigo)){
+				
+				Date data = Date.valueOf(JOptionPane.showInputDialog("Digite a data da matricula: ").toString());
+				double valorPago = Double.parseDouble(JOptionPane.showInputDialog("Digite o valor pago pelo aluno: ").toString());
+				
+				Fachada.getInstance().matricular(cpf, codigo, data, valorPago);
+				
+			} else {
+				JOptionPane.showMessageDialog(null, "Turma inexistente");
+			}
+			
+		} else {
+			JOptionPane.showMessageDialog(null, "Aluno inexistente");
+		}
+		
+		
 	}
 	
 	public static void excluirAluno() {

@@ -7,6 +7,7 @@ import java.util.List;
 
 import control.dao.AlunoDAO;
 import control.dao.CursoDAO;
+import control.dao.MatriculaDAO;
 import control.dao.ProfessorDAO;
 import control.dao.TurmaDAO;
 
@@ -108,26 +109,31 @@ public class Fachada {
 	public void cadastrarAluno(int cpf, String nome, String dataNascimento, int dddTelefone, int telefoneNumero, String tipo, String logradouro, int numero,
 			String complemento, String bairro, String cidade, int cep, String uf) {
 		
-		Telefone telefone = new Telefone();
-		telefone.setDdd(dddTelefone);
-		telefone.setNumero(telefoneNumero);
-		telefone.setTipo(tipo);
+		Telefone telefone = new Telefone(dddTelefone, numero, tipo, cpf);
 		
-		Aluno aluno = new Aluno(cpf, nome, dataNascimento, logradouro, numero, complemento, bairro, cidade, cep, uf, telefone);
+		Aluno aluno = new Aluno(cpf, nome, dataNascimento, logradouro, numero, complemento, bairro, cidade, cep, uf);
+		aluno.addTelefone(telefone);
+		
+		new AlunoDAO().cadastrar(aluno);
 		
 	}
 	
 	public void alterarAluno(int cpf, String nome, String dataNascimento, int dddTelefone, int telefoneNumero, String tipo, String logradouro, int numero,
 			String complemento, String bairro, String cidade, int cep, String uf) {
 		
-		Telefone telefone = new Telefone();
-		telefone.setDdd(dddTelefone);
-		telefone.setNumero(telefoneNumero);
-		telefone.setTipo(tipo);
-		
-		Aluno aluno = new Aluno(cpf, nome, dataNascimento, logradouro, numero, complemento, bairro, cidade, cep, uf, telefone);
+		Aluno aluno = new Aluno(cpf, nome, dataNascimento, logradouro, numero, complemento, bairro, cidade, cep, uf);
 
 		new AlunoDAO().alterar(aluno);
+		
+	}
+	
+	public void matricular (int cpf, int codigo, Date data, double valorPago){
+		
+		Aluno aluno = new AlunoDAO().consultar(cpf);
+		Turma turma = new TurmaDAO().consultar(codigo);
+		
+		Matricula matricula = new Matricula(aluno, turma, data, valorPago);
+		new MatriculaDAO().matricular(matricula);
 		
 	}
 	

@@ -5,8 +5,9 @@ public class Telefone {
 	private Integer ddd;
 	private Integer numero;
 	private String tipo;
+	private int cpf;
 	
-	public Telefone() {
+	public Telefone(int ddd, int numero, String tipo, int cpf) {
 		
 	}
 
@@ -33,6 +34,16 @@ public class Telefone {
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
+
+	public int getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(int cpf) {
+		this.cpf = cpf;
+	}
+	
+	
 	
 	
 }
