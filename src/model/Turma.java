@@ -2,7 +2,6 @@ package model;
 
 import java.sql.Date;
 import java.sql.Time;
-import java.util.ArrayList;
 
 public class Turma {
 	private Integer codigo;
@@ -13,7 +12,6 @@ public class Turma {
 	private char turno;
 	private Curso curso;
 	private Professor professor;
-	private ArrayList<Aluno> aluno = new ArrayList<Aluno>();
 	
 	public Turma() {
 		

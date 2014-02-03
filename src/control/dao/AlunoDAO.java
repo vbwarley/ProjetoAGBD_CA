@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Aluno;
-import model.Professor;
-import model.Telefone;
 import control.dao.banco.ConnectionFactory;
 
 public class AlunoDAO {
@@ -61,7 +59,7 @@ public class AlunoDAO {
 						
 			if (rs.next()) { //Lembrar de ajeitar o telefone
 				Aluno aluno = new Aluno(cpf, rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getString(10));
-				
+				aluno.setTelefone(new TelefoneDAO().consultar(rs.getInt(1)));
 				stmt.close();
 				return aluno;
 			} else 
@@ -73,7 +71,8 @@ public class AlunoDAO {
 	}
 	
 	public void alterar(Aluno aluno) {
-		String sql = "UPDATE Aluno SET nome = ?, dataNascimento = ?, logradouro = ?, numero = ?, complemento = ?, bairro = ?, cidade = ?, cep = ?, uf? WHERE cpf = ?";
+		String sql = "UPDATE Aluno SET nome = ?, dataNascimento = ?, logradouro = ?, "
+				+ "numero = ?, complemento = ?, bairro = ?, cidade = ?, cep = ?, uf = ? WHERE cpf = ?";
 		
 		try {
 			PreparedStatement stmt = connection.prepareStatement(sql);
