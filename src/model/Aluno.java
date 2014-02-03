@@ -10,12 +10,14 @@ public class Aluno {
 	private Integer numero;
 	private String complemento;
 	private String bairro;
-	private Integer cidade;
+	private Integer cep;
+	private String cidade;
 	private String UF;
 	private Telefone telefone;
 	private Turma turma;
 	
-	public Aluno() {
+	public Aluno(int cpf, String nome, String dataNascimento, String logradouro, int numero,
+			String complemento, String bairro, String cidade, int cep, String uf, Telefone telefone) {
 		
 	}
 
@@ -75,11 +77,11 @@ public class Aluno {
 		this.bairro = bairro;
 	}
 
-	public Integer getCidade() {
+	public String getCidade() {
 		return cidade;
 	}
 
-	public void setCidade(Integer cidade) {
+	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
 
@@ -97,6 +99,14 @@ public class Aluno {
 
 	public void setTelefone(Telefone telefone) {
 		this.telefone = telefone;
+	}
+
+	public Integer getCep() {
+		return cep;
+	}
+
+	public void setCep(Integer cep) {
+		this.cep = cep;
 	}
 	
 }

@@ -103,6 +103,47 @@ public class Fachada {
 		Professor professor = pdao.consultar(cpf);
 		pdao.excluir(professor);
 	}
+	
+	public void cadastrarAluno(int cpf, String nome, String dataNascimento, int dddTelefone, int telefoneNumero, String tipo, String logradouro, int numero,
+			String complemento, String bairro, String cidade, int cep, String uf) {
+		
+		Telefone telefone = new Telefone();
+		telefone.setDdd(dddTelefone);
+		telefone.setNumero(telefoneNumero);
+		telefone.setTipo(tipo);
+		
+		Aluno aluno = new Aluno(cpf, nome, dataNascimento, logradouro, numero, complemento, bairro, cidade, cep, uf, telefone);
+		
+	}
+	
+	public void alterarAluno(int cpf, String nome, String dataNascimento, int dddTelefone, int telefoneNumero, String tipo, String logradouro, int numero,
+			String complemento, String bairro, String cidade, int cep, String uf) {
+		
+		Telefone telefone = new Telefone();
+		telefone.setDdd(dddTelefone);
+		telefone.setNumero(telefoneNumero);
+		telefone.setTipo(tipo);
+		
+		//Aluno aluno = new Aluno(cpf, nome, dataNascimento, logradouro, numero, complemento, bairro, cidade, cep, uf, telefone);
+
+	}
+	
+	public boolean consultarAluno(Integer codigo) {
+		return new TurmaDAO().consultar(codigo) == null ? false : true;
+	}
+	
+	public String consultarAlunos() {
+		List<Aluno> alunos = new ArrayList<Aluno>();
+
+		//turmas = new TurmaDAO().consultar();
+
+		String tmostrar = "";
+
+		//for (Turma t : turmas) 
+			//tmostrar += t.toString() + "\n\n----------------------\n\n";
+
+		return tmostrar;
+	}
 
 	public void cadastrarTurma(Integer codigoCurso, Date dataInicio, Date dataTermino,
 			Time horaInicio, Time horaTermino, char turno, Integer codigoProfessor) {
