@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Negocios.Curso;
-import Negocios.Turma;
+import model.Curso;
+import model.Turma;
 import dao.banco.ConnectionFactory;
 
 public class CursoDAO {

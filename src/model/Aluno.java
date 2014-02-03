@@ -1,6 +1,8 @@
 package model;
 
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Aluno {
 	private Integer cpf;
@@ -10,11 +12,25 @@ public class Aluno {
 	private Integer numero;
 	private String complemento;
 	private String bairro;
-	private Integer cidade;
+	private Integer cep;
+	private String cidade;
 	private String UF;
-	private Telefone telefone;
+	private List<Telefone> telefone;
+	private Turma turma;
 	
-	public Aluno() {
+	public Aluno(int cpf, String nome, String dataNascimento, String logradouro, int numero,
+			String complemento, String bairro, String cidade, int cep, String uf) {
+		
+		this.cpf = cpf;
+		this.nome = nome;
+		this.dataNascimento = Date.valueOf(dataNascimento);
+		this.logradouro = logradouro;
+		this.numero = numero;
+		this.complemento = complemento;
+		this.bairro = bairro;
+		this.cidade = cidade;
+		this.cep = cep;
+		this.UF = uf;
 		
 	}
 
@@ -74,11 +90,11 @@ public class Aluno {
 		this.bairro = bairro;
 	}
 
-	public Integer getCidade() {
+	public String getCidade() {
 		return cidade;
 	}
 
-	public void setCidade(Integer cidade) {
+	public void setCidade(String cidade) {
 		this.cidade = cidade;
 	}
 
@@ -90,12 +106,50 @@ public class Aluno {
 		UF = uF;
 	}
 
-	public Telefone getTelefone() {
+	public List<Telefone> getTelefone() {
 		return telefone;
 	}
 
-	public void setTelefone(Telefone telefone) {
+	public void setTelefone(List<Telefone> telefone) {
 		this.telefone = telefone;
+	}
+
+	public Turma getTurma() {
+		return turma;
+	}
+
+	public void setTurma(Turma turma) {
+		this.turma = turma;
+	}
+
+	public Integer getCep() {
+		return cep;
+	}
+
+	public void setCep(Integer cep) {
+		this.cep = cep;
+	}
+	
+	public void addTelefone(Telefone telefone){
+		this.telefone.add(telefone);
+	}
+	
+	public String toString(){
+		
+		String numeros = "";
+		
+		for (int i = 0; i < this.telefone.size(); i++){
+			 numeros = "\n" + this.telefone.get(i).toString(); 
+		}
+		
+		String info = "CPF: " + this.cpf + "\nNome: " + this.nome + "\nData de nascimento: " 
+		+ this.dataNascimento	+ "\nLogradouro: " + this.logradouro + "\nNumero: " 
+		+ this.numero + "\nComplemento: " + this.complemento + "\nBairro: "	+ this.bairro 
+		+ "\nCEP: "	+ this.cep + "\nCidade: " + this.cidade + "\nUF: " + "" + this.UF 
+		+ "\nTelefones: " + numeros + "\nTurma: " + this.turma;
+		
+		return info;
+	
 	}
 	
 }

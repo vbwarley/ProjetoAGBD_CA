@@ -1,6 +1,6 @@
 package dao;
 
-import Negocios.Professor;
+import model.Professor;
 
 public class ProfessorDAO {
 

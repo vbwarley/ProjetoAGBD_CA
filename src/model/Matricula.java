@@ -8,6 +8,13 @@ public class Matricula {
 	private Turma turma;
 	private Aluno aluno;
 	
+	public Matricula(Aluno aluno, Turma turma, Date data, double valorPago){
+		this.aluno = aluno;
+		this.turma = turma;
+		this.data = data;
+		this.valorPago = valorPago;
+	}
+	
 	public Turma getTurma() {
 		return turma;
 	}
