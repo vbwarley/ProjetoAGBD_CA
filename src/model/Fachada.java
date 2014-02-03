@@ -5,6 +5,7 @@ import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
+import control.dao.AlunoDAO;
 import control.dao.CursoDAO;
 import control.dao.ProfessorDAO;
 import control.dao.TurmaDAO;
@@ -31,7 +32,7 @@ public class Fachada {
 	}
 	
 	public boolean consultarProfessor(Integer cpf) {
-		return new CursoDAO().consultar(cpf) == null ? false : true;
+		return new ProfessorDAO().consultar(cpf) == null ? false : true;
 	}
 	
 	public String consultarProfessores() {
@@ -124,27 +125,35 @@ public class Fachada {
 		telefone.setNumero(telefoneNumero);
 		telefone.setTipo(tipo);
 		
-		//Aluno aluno = new Aluno(cpf, nome, dataNascimento, logradouro, numero, complemento, bairro, cidade, cep, uf, telefone);
+		Aluno aluno = new Aluno(cpf, nome, dataNascimento, logradouro, numero, complemento, bairro, cidade, cep, uf, telefone);
 
+		new AlunoDAO().alterar(aluno);
+		
 	}
 	
-	public boolean consultarAluno(Integer codigo) {
-		return new TurmaDAO().consultar(codigo) == null ? false : true;
+	public boolean consultarAluno(Integer cpf) {
+		return new AlunoDAO().consultar(cpf) == null ? false : true;
 	}
 	
 	public String consultarAlunos() {
 		List<Aluno> alunos = new ArrayList<Aluno>();
 
-		//turmas = new TurmaDAO().consultar();
+		alunos = new AlunoDAO().consultar();
 
-		String tmostrar = "";
+		String aMostrar = "";
 
-		//for (Turma t : turmas) 
-			//tmostrar += t.toString() + "\n\n----------------------\n\n";
+		for (Aluno a : alunos) 
+			aMostrar += a.toString() + "\n\n----------------------\n\n";
 
-		return tmostrar;
+		return aMostrar;
 	}
 
+	public void excluirAluno(Integer cpf) {
+		AlunoDAO adao = new AlunoDAO();
+		Aluno aluno = adao.consultar(cpf);
+		adao.excluir(aluno);
+	}
+	
 	public void cadastrarTurma(Integer codigoCurso, Date dataInicio, Date dataTermino,
 			Time horaInicio, Time horaTermino, char turno, Integer codigoProfessor) {
 

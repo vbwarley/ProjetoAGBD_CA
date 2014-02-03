@@ -216,21 +216,24 @@ public class InterfaceUsuario {
 		if (Fachada.getInstance().consultarAluno(cpf)) {
 			JOptionPane.showMessageDialog(null, "O aluno é válido. Para alterá-lo, preencha os campos que aparecerão.");
 			
-			String nome = JOptionPane.showInputDialog("Digite o nome do aluno: ").toString();
-			String dataNascimento = JOptionPane.showInputDialog("Digite a data de nascimento: (aaaa-mm-dd)").toString();
-			int dddTelefone = Integer.parseInt(JOptionPane.showInputDialog("Digite o DDD do telefone do aluno: ").toString());
-			int telefone = Integer.parseInt(JOptionPane.showInputDialog("Digite o n�mero do telefone do aluno: ").toString());
-			String tipo = JOptionPane.showInputDialog("Digite o tipo de telefone (ex.: Residencial): ").toString();
-			String logradouro = JOptionPane.showInputDialog("Digite o logradouro do aluno: ").toString();
-			int numero = Integer.parseInt(JOptionPane.showInputDialog("Digite o n�mero da casa: ").toString());
-			String complemento = JOptionPane.showInputDialog("Digite o complemento do endere�o: ");
-			String bairro = JOptionPane.showInputDialog("Digite o bairro do aluno: ");
-			String cidade = JOptionPane.showInputDialog("Digite a cidade do aluno: ");
-			int cep = Integer.parseInt(JOptionPane.showInputDialog("Digite o tipo de telefone (ex.: Residencial): ").toString());
-			String uf = JOptionPane.showInputDialog("Digite a abreviatura da UF onde o aluno mora (ex.: AL)");
+			String nome = JOptionPane.showInputDialog("Digite o novo nome do aluno: ").toString();
+			String dataNascimento = JOptionPane.showInputDialog("Digite a nova data de nascimento: (aaaa-mm-dd)").toString();
+			int dddTelefone = Integer.parseInt(JOptionPane.showInputDialog("Digite o novo DDD do telefone do aluno: ").toString());
+			int telefone = Integer.parseInt(JOptionPane.showInputDialog("Digite o novo n�mero do telefone do aluno: ").toString());
+			String tipo = JOptionPane.showInputDialog("Digite o novo tipo de telefone (ex.: Residencial): ").toString();
+			String logradouro = JOptionPane.showInputDialog("Digite o novo logradouro do aluno: ").toString();
+			int numero = Integer.parseInt(JOptionPane.showInputDialog("Digite o novo n�mero da casa: ").toString());
+			String complemento = JOptionPane.showInputDialog("Digite o novo complemento do endere�o: ");
+			String bairro = JOptionPane.showInputDialog("Digite o novo bairro do aluno: ");
+			String cidade = JOptionPane.showInputDialog("Digite a nova cidade do aluno: ");
+			int cep = Integer.parseInt(JOptionPane.showInputDialog("Digite o novo tipo de telefone (ex.: Residencial): ").toString());
+			String uf = JOptionPane.showInputDialog("Digite a abreviatura da nova UF onde o aluno mora (ex.: AL)");
 			
 			Fachada.getInstance().alterarAluno(cpf, nome, dataNascimento, dddTelefone, telefone, tipo, logradouro, numero, 
 					complemento, bairro, cidade, cep, uf);
+			
+			JOptionPane.showMessageDialog(null,"Aluno atualizado com sucesso");
+			
 		} else {
 			JOptionPane.showMessageDialog(null, "aluno inv�lido");
 		}		
@@ -239,20 +242,20 @@ public class InterfaceUsuario {
 	public static void consultarAluno() {
 		JOptionPane.showMessageDialog(null, "Assim que você clicar em OK, aparecerão os cursos cadastrados.");
 		
-		String professores = Fachada.getInstance().consultarProfessores();
+		String alunos = Fachada.getInstance().consultarAlunos();
 		
-		if (professores.isEmpty())
-			JOptionPane.showMessageDialog(null, "Não há cursos cadastrados.");
+		if (alunos.isEmpty())
+			JOptionPane.showMessageDialog(null, "Não há alunos cadastrados.");
 		else
-			JOptionPane.showMessageDialog(null, professores);
+			JOptionPane.showMessageDialog(null, alunos);
 	}
 	
 	public static void excluirAluno() {
-		Integer cpf = Integer.parseInt(JOptionPane.showInputDialog("Para excluir algum curso você precisa digitar o cpf. Se existir, você poderá excluir: "
+		Integer cpf = Integer.parseInt(JOptionPane.showInputDialog("Para excluir algum aluno você precisa digitar o cpf. Se existir, você poderá excluir: "
 				+ "\n\nDigite o código: ").toString());
-		if (Fachada.getInstance().consultarProfessor(cpf)){
-			Fachada.getInstance().excluirProfessor(cpf);
-			JOptionPane.showMessageDialog(null, "Professor exclu�do com sucesso");
+		if (Fachada.getInstance().consultarAluno(cpf)){
+			Fachada.getInstance().excluirAluno(cpf);
+			JOptionPane.showMessageDialog(null, "Aluno exclu�do com sucesso");
 		} else {
 			JOptionPane.showMessageDialog(null, "Professor inexistente");
 		}
@@ -298,7 +301,7 @@ public class InterfaceUsuario {
 	}
 	
 	public static void excluirProfessor() {
-		Integer cpf = Integer.parseInt(JOptionPane.showInputDialog("Para excluir algum curso você precisa digitar o cpf. Se existir, você poderá excluir: "
+		Integer cpf = Integer.parseInt(JOptionPane.showInputDialog("Para excluir algum professor você precisa digitar o cpf. Se existir, você poderá excluir: "
 				+ "\n\nDigite o código: ").toString());
 		if (Fachada.getInstance().consultarProfessor(cpf)){
 			Fachada.getInstance().excluirProfessor(cpf);
