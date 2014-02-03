@@ -29,12 +29,36 @@ public class Fachada {
 	public boolean consultarCurso(Integer codigo) {
 		return new CursoDAO().consultar(codigo) == null ? false : true;
 	}
+	
+	public boolean consultarProfessor(Integer cpf) {
+		return new CursoDAO().consultar(cpf) == null ? false : true;
+	}
+	
+	public String consultarProfessores() {
+		List<Professor> professores = new ArrayList<Professor>();
+
+		professores = new ProfessorDAO().consultar();
+
+		String pmostrar = "";
+
+		for (Professor p : professores) 
+			pmostrar += p.toString();
+			pmostrar += "\n\n-------------------\n\n";
+
+		return pmostrar;
+	}
 
 	public void alterarCurso(Integer codigo, String nome, String descricao,
 			Double valor, Integer limite) {
 		Curso curso = new Curso(nome, descricao, valor, limite);
 		curso.setCodigo(codigo);
 		new CursoDAO().alterar(curso);
+	}
+	
+	public void alterarProfessor(Integer cpf, String nome, int telefone, double valorHora) {
+		Professor professor = new Professor(cpf, nome, telefone, valorHora);
+		
+		new ProfessorDAO().alterar(professor);
 	}
 
 	public String consultarCursos() {
@@ -72,6 +96,12 @@ public class Fachada {
 		CursoDAO cdao = new CursoDAO();
 		Curso curso = cdao.consultar(codigo);
 		cdao.excluir(curso);
+	}
+	
+	public void excluirProfessor(Integer cpf) {
+		ProfessorDAO pdao = new ProfessorDAO();
+		Professor professor = pdao.consultar(cpf);
+		pdao.excluir(professor);
 	}
 
 	public void cadastrarTurma(Integer codigoCurso, Date dataInicio, Date dataTermino,
@@ -119,4 +149,24 @@ public class Fachada {
 		tdao.excluir(turma);
 
 	}
+	
+	public void cadastrarProfessor(int cpf, String nome, int telefone, double valorHora){
+		
+		Professor professor = new Professor(cpf, nome, telefone, valorHora);
+		
+		new ProfessorDAO().cadastrar(professor);
+		
+	}
+	
+	
+	public void alteraProfessor(int cpf, String nome, int telefone, double valorHora) {
+
+		Professor professor = new Professor(cpf, nome, telefone, valorHora);
+
+		new ProfessorDAO().alterar(professor);
+
+	}
+	
 }
+
+

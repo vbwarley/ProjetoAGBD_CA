@@ -6,7 +6,7 @@ public class Professor {
 	private Integer telefone;
 	private Double valorHoraAula;
 	
-	public Professor() {
+	public Professor(int cpf, String nome, int telefone, double valorHora) {
 		
 	}
 

@@ -23,6 +23,9 @@ public class InterfaceUsuario {
 		case 2:
 			manterTurma();
 			break;
+		case 3:
+			manterProfessor();
+			break;
 		case 0:
 			System.exit(0);
 		default:
@@ -32,6 +35,8 @@ public class InterfaceUsuario {
 		}
 		
 	}
+	
+	
 	
 	public static void manterCurso() {
 		int opcao = Integer.parseInt(JOptionPane.showInputDialog(null, "\tMenu Manter Cursos\t."
@@ -68,6 +73,42 @@ public class InterfaceUsuario {
 		}
 	}
 	
+	public static void manterProfessor() {
+		int opcao = Integer.parseInt(JOptionPane.showInputDialog(null, "\tMenu Manter Professor\t."
+				+ "\n\nPor favor, selecione alguma das opções abaixo: "
+				+ "\n1. Cadastrar"
+				+ "\n2. Alterar"
+				+ "\n3. Consultar"
+				+ "\n4. Excluir"
+				+ "\n0. Voltar...\n\n").toString());
+		
+		switch (opcao) {
+		case 1:
+			cadastrarProfessor();
+			manterProfessor();
+			break;
+		case 2:
+			alterarProfessor();
+			manterProfessor();
+			break;
+		case 3:
+			consultarProfessores();
+			manterProfessor();
+			break;
+		case 4:
+			excluirProfessor();
+			manterProfessor();
+			break;
+		case 0:
+			menu();
+		default:
+			JOptionPane.showMessageDialog(null, "Opcão inválida!");
+			manterCurso();
+			break;
+		}
+	}
+
+	
 	public static void manterTurma() {
 		int opcao = Integer.parseInt(JOptionPane.showInputDialog(null, "\tMenu Manter Turmas\t."
 				+ "\n\nPor favor, selecione alguma das opções abaixo: "
@@ -103,6 +144,56 @@ public class InterfaceUsuario {
 		}
 	}
 		
+	public static void cadastrarProfessor() {
+		JOptionPane.showMessageDialog(null,"Para cadastrar um professor você deve preencher os campos que aparecerão a seguir.");
+		
+		int cpf = Integer.parseInt(JOptionPane.showInputDialog("Digite o CPF do professor: ").toString());
+		String nome = JOptionPane.showInputDialog("Digite o nome do professor: ").toString();
+		int telefone = Integer.parseInt(JOptionPane.showInputDialog("Digite o telefone do professor: ").toString());
+		double valorDaHora = Double.parseDouble(JOptionPane.showInputDialog("Digite o valor da hora: ").toString());
+		
+		Fachada.getInstance().cadastrarProfessor(cpf, nome, telefone, valorDaHora);		
+	}
+	
+	public static void alterarProfessor() {
+		Integer cpf = Integer.parseInt(JOptionPane.showInputDialog("Para alterar algum professor você precisa digitar o cpf. Se existir, você poderá alterar: "
+				+ "\n\nDigite cpf: ").toString());
+		
+		if (Fachada.getInstance().consultarProfessor(cpf)) {
+			JOptionPane.showMessageDialog(null, "O professor é válido. Para alterá-lo, preencha os campos que aparecerão.");
+			
+			String nome = JOptionPane.showInputDialog("Digite o nome do curso: ").toString();
+			int telefone = Integer.parseInt(JOptionPane.showInputDialog("Digite o telefone do professor: ").toString());
+			Double valorHora = Double.parseDouble(JOptionPane.showInputDialog("Digite o valor por hora: ").toString());
+			
+			Fachada.getInstance().alterarProfessor(cpf, nome, telefone, valorHora);
+		} else {
+			JOptionPane.showMessageDialog(null, "Professor inv�lido");
+		}		
+	}
+	
+	public static void consultarProfessores() {
+		JOptionPane.showMessageDialog(null, "Assim que você clicar em OK, aparecerão os cursos cadastrados.");
+		
+		String professores = Fachada.getInstance().consultarProfessores();
+		
+		if (professores.isEmpty())
+			JOptionPane.showMessageDialog(null, "Não há cursos cadastrados.");
+		else
+			JOptionPane.showMessageDialog(null, professores);
+	}
+	
+	public static void excluirProfessor() {
+		Integer cpf = Integer.parseInt(JOptionPane.showInputDialog("Para excluir algum curso você precisa digitar o cpf. Se existir, você poderá excluir: "
+				+ "\n\nDigite o código: ").toString());
+		if (Fachada.getInstance().consultarProfessor(cpf)){
+			Fachada.getInstance().excluirProfessor(cpf);
+			JOptionPane.showMessageDialog(null, "Professor exclu�do com sucesso");
+		} else {
+			JOptionPane.showMessageDialog(null, "Professor inexistente");
+		}
+	}
+	
 	public static void cadastrarCurso() {
 		JOptionPane.showMessageDialog(null,"Para cadastrar um curso você deve preencher os campos que aparecerão a seguir.");
 		

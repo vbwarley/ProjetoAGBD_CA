@@ -13,6 +13,7 @@ public class Aluno {
 	private Integer cidade;
 	private String UF;
 	private Telefone telefone;
+	private Turma turma;
 	
 	public Aluno() {
 		

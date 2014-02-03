@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Negocios.Turma;
+import model.Turma;
 import dao.banco.ConnectionFactory;
 
 public class TurmaDAO {
