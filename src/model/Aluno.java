@@ -134,4 +134,22 @@ public class Aluno {
 		this.telefone.add(telefone);
 	}
 	
+	public String toString(){
+		
+		String numeros = "";
+		
+		for (int i = 0; i < this.telefone.size(); i++){
+			 numeros = "\n" + this.telefone.get(i).toString(); 
+		}
+		
+		String info = "CPF: " + this.cpf + "\nNome: " + this.nome + "\nData de nascimento: " 
+		+ this.dataNascimento	+ "\nLogradouro: " + this.logradouro + "\nNumero: " 
+		+ this.numero + "\nComplemento: " + this.complemento + "\nBairro: "	+ this.bairro 
+		+ "\nCEP: "	+ this.cep + "\nCidade: " + this.cidade + "\nUF: " + "" + this.UF 
+		+ "\nTelefones: " + numeros + "\nTurma: " + this.turma;
+		
+		return info;
+	
+	}
+	
 }

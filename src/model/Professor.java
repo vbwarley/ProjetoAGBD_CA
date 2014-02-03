@@ -44,5 +44,13 @@ public class Professor {
 	public void setValorHoraAula(Double valorHoraAula) {
 		this.valorHoraAula = valorHoraAula;
 	}
+
+	@Override
+	public String toString() {
+		return "Professor "+"\nCPF: " + cpf + "\nNome: " + nome + "\nTelefone: "
+				+ telefone + "\nValorHoraAula: " + valorHoraAula;
+	}
+
+	
 	
 }
