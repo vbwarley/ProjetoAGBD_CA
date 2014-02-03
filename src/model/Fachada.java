@@ -22,9 +22,9 @@ public class Fachada {
 		return instance;
 	}
 
-	public void cadastrarCurso(String nome, String descricao, Double valor,
+	public void cadastrarCurso(String nome, String descricao,
 			Integer limite) {
-		Curso curso = new Curso(nome, descricao, valor, limite);
+		Curso curso = new Curso(nome, descricao, limite);
 		new CursoDAO().cadastrar(curso);		
 	}
 
@@ -51,8 +51,8 @@ public class Fachada {
 	}
 
 	public void alterarCurso(Integer codigo, String nome, String descricao,
-			Double valor, Integer limite) {
-		Curso curso = new Curso(nome, descricao, valor, limite);
+			Integer limite) {
+		Curso curso = new Curso(nome, descricao, limite);
 		curso.setCodigo(codigo);
 		new CursoDAO().alterar(curso);
 	}

@@ -7,7 +7,7 @@ public class Curso {
 	private Integer codigo;
 	private String nome;
 	private String descricaoConteudo;
-	private Double valor;
+	private Double valor = 0.0;
 	private Integer limite;
 	private List<Turma> turmas;
 	
@@ -15,10 +15,9 @@ public class Curso {
 
 	}
 
-	public Curso(String nome2, String descricao, Double valor2, Integer limite2) {
+	public Curso(String nome2, String descricao, Integer limite2) {
 		nome = nome2;
 		descricaoConteudo = descricao;
-		valor = valor2;
 		limite = limite2;
 	}
 

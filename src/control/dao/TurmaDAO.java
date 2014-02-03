@@ -1,9 +1,11 @@
 package control.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +21,11 @@ public class TurmaDAO {
 
 	public void cadastrar(Turma turma) {
 		String sql = "INSERT INTO Turma " +
-				"(dataInicio, dataFim, horaInicio, horaFim, turno, codigoCurso, codigoProfessor)" +
+				"(dataInicio, dataTermino, horaInicio, horaTermino, turno, codigoCurso, cpfProfessor)" +
 				" VALUES (?,?,?,?,?,?,?)";
 		
 		try {
-			PreparedStatement stmt = connection.prepareStatement(sql);
+			PreparedStatement stmt = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 			
 			stmt.setDate(1, turma.getDataInicio());
 			stmt.setDate(2, turma.getDataFim());
@@ -32,9 +34,35 @@ public class TurmaDAO {
 			stmt.setString(5, String.valueOf(turma.getTurno()));
 			stmt.setInt(6, turma.getCurso().getCodigo());
 			stmt.setInt(7, turma.getProfessor().getCpf() );
-			
+
 			stmt.execute();
-			stmt.close();
+			
+			// pega a chave gerada automaticamente
+			ResultSet rk = stmt.getGeneratedKeys();
+			
+			if (rk.next())
+				turma.setCodigo(rk.getInt(1));
+			
+			// começa a ficar tretudo
+			CallableStatement cs = connection.prepareCall("select retornaProfTempAulas (?,?)");
+			
+			cs.setInt(1, turma.getProfessor().getCpf());
+			cs.setInt(2, turma.getCodigo());
+			
+			cs.executeQuery();
+			
+			ResultSet rs = cs.getResultSet();
+			
+			if (rs.next())
+				turma.getCurso().setValor(((turma.getProfessor().getValorHoraAula() * rs.getDouble(1))*1.25)*turma.getCurso().getLimite());
+			
+
+			cs.close();
+			rs.close();	
+			stmt.close();	
+			
+			new CursoDAO().alterar(turma.getCurso());
+
 			
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
@@ -85,7 +113,7 @@ public class TurmaDAO {
 				turma.setHoraTermino(rs.getTime("horaTermino"));
 				turma.setTurno(rs.getString("turno").charAt(0)); // aqui pode dar erro :|
 				turma.setCurso(new CursoDAO().consultar(rs.getInt("codigoCurso")));
-				turma.setProfessor(new ProfessorDAO().consultar(rs.getInt("codigoProfessor")));
+				turma.setProfessor(new ProfessorDAO().consultar(rs.getInt("cpfProfessor")));
 				
 				return turma;
 			} else 

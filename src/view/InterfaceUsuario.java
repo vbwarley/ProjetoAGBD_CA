@@ -196,11 +196,11 @@ public class InterfaceUsuario {
 		String nome = JOptionPane.showInputDialog("Digite o nome do aluno: ").toString();
 		String dataNascimento = JOptionPane.showInputDialog("Digite a data de nascimento: (aaaa-mm-dd)").toString();
 		int dddTelefone = Integer.parseInt(JOptionPane.showInputDialog("Digite o DDD do telefone do aluno: ").toString());
-		int telefone = Integer.parseInt(JOptionPane.showInputDialog("Digite o número do telefone do aluno: ").toString());
+		int telefone = Integer.parseInt(JOptionPane.showInputDialog("Digite o nï¿½mero do telefone do aluno: ").toString());
 		String tipo = JOptionPane.showInputDialog("Digite o tipo de telefone (ex.: Residencial): ").toString();
 		String logradouro = JOptionPane.showInputDialog("Digite o logradouro do aluno: ").toString();
-		int numero = Integer.parseInt(JOptionPane.showInputDialog("Digite o número da casa: ").toString());
-		String complemento = JOptionPane.showInputDialog("Digite o complemento do endereço: ");
+		int numero = Integer.parseInt(JOptionPane.showInputDialog("Digite o nï¿½mero da casa: ").toString());
+		String complemento = JOptionPane.showInputDialog("Digite o complemento do endereï¿½o: ");
 		String bairro = JOptionPane.showInputDialog("Digite o bairro do aluno: ");
 		String cidade = JOptionPane.showInputDialog("Digite a cidade do aluno: ");
 		int cep = Integer.parseInt(JOptionPane.showInputDialog("Digite o tipo de telefone (ex.: Residencial): ").toString());
@@ -221,11 +221,11 @@ public class InterfaceUsuario {
 			String nome = JOptionPane.showInputDialog("Digite o novo nome do aluno: ").toString();
 			String dataNascimento = JOptionPane.showInputDialog("Digite a nova data de nascimento: (aaaa-mm-dd)").toString();
 			int dddTelefone = Integer.parseInt(JOptionPane.showInputDialog("Digite o novo DDD do telefone do aluno: ").toString());
-			int telefone = Integer.parseInt(JOptionPane.showInputDialog("Digite o novo número do telefone do aluno: ").toString());
+			int telefone = Integer.parseInt(JOptionPane.showInputDialog("Digite o novo nï¿½mero do telefone do aluno: ").toString());
 			String tipo = JOptionPane.showInputDialog("Digite o novo tipo de telefone (ex.: Residencial): ").toString();
 			String logradouro = JOptionPane.showInputDialog("Digite o novo logradouro do aluno: ").toString();
-			int numero = Integer.parseInt(JOptionPane.showInputDialog("Digite o novo número da casa: ").toString());
-			String complemento = JOptionPane.showInputDialog("Digite o novo complemento do endereço: ");
+			int numero = Integer.parseInt(JOptionPane.showInputDialog("Digite o novo nï¿½mero da casa: ").toString());
+			String complemento = JOptionPane.showInputDialog("Digite o novo complemento do endereï¿½o: ");
 			String bairro = JOptionPane.showInputDialog("Digite o novo bairro do aluno: ");
 			String cidade = JOptionPane.showInputDialog("Digite a nova cidade do aluno: ");
 			int cep = Integer.parseInt(JOptionPane.showInputDialog("Digite o novo tipo de telefone (ex.: Residencial): ").toString());
@@ -237,7 +237,7 @@ public class InterfaceUsuario {
 			JOptionPane.showMessageDialog(null,"Aluno atualizado com sucesso");
 			
 		} else {
-			JOptionPane.showMessageDialog(null, "aluno inválido");
+			JOptionPane.showMessageDialog(null, "aluno invï¿½lido");
 		}		
 	}
 	
@@ -257,7 +257,7 @@ public class InterfaceUsuario {
 		int cpf = Integer.parseInt(JOptionPane.showInputDialog("Digite o cpf do aluno a ser matriculado: ").toString());
 		
 		if (Fachada.getInstance().consultarAluno(cpf)){
-			int codigo = Integer.parseInt(JOptionPane.showInputDialog("Digite o código da turma").toString());
+			int codigo = Integer.parseInt(JOptionPane.showInputDialog("Digite o cï¿½digo da turma").toString());
 			if (Fachada.getInstance().consultarTurma(codigo)){
 				
 				Date data = Date.valueOf(JOptionPane.showInputDialog("Digite a data da matricula: ").toString());
@@ -281,7 +281,7 @@ public class InterfaceUsuario {
 				+ "\n\nDigite o cÃ³digo: ").toString());
 		if (Fachada.getInstance().consultarAluno(cpf)){
 			Fachada.getInstance().excluirAluno(cpf);
-			JOptionPane.showMessageDialog(null, "Aluno excluído com sucesso");
+			JOptionPane.showMessageDialog(null, "Aluno excluï¿½do com sucesso");
 		} else {
 			JOptionPane.showMessageDialog(null, "Professor inexistente");
 		}
@@ -311,7 +311,7 @@ public class InterfaceUsuario {
 			
 			Fachada.getInstance().alterarProfessor(cpf, nome, telefone, valorHora);
 		} else {
-			JOptionPane.showMessageDialog(null, "Professor inválido");
+			JOptionPane.showMessageDialog(null, "Professor invï¿½lido");
 		}		
 	}
 	
@@ -331,7 +331,7 @@ public class InterfaceUsuario {
 				+ "\n\nDigite o cÃ³digo: ").toString());
 		if (Fachada.getInstance().consultarProfessor(cpf)){
 			Fachada.getInstance().excluirProfessor(cpf);
-			JOptionPane.showMessageDialog(null, "Professor excluído com sucesso");
+			JOptionPane.showMessageDialog(null, "Professor excluï¿½do com sucesso");
 		} else {
 			JOptionPane.showMessageDialog(null, "Professor inexistente");
 		}
@@ -342,10 +342,9 @@ public class InterfaceUsuario {
 		
 		String nome = JOptionPane.showInputDialog("Digite o nome do curso: ").toString();
 		String descricao = JOptionPane.showInputDialog("Digite a descriÃ§Ã£o do conteÃºdo: ").toString();
-		Double valor = Double.parseDouble(JOptionPane.showInputDialog("Digite o valor do curso: ").toString());
 		Integer limite = Integer.parseInt(JOptionPane.showInputDialog("Digite o limite de turmas: ").toString());
 		
-		Fachada.getInstance().cadastrarCurso(nome, descricao, valor, limite);		
+		Fachada.getInstance().cadastrarCurso(nome, descricao, limite);		
 	}
 	
 	public static void alterarCurso() {
@@ -357,10 +356,9 @@ public class InterfaceUsuario {
 			
 			String nome = JOptionPane.showInputDialog("Digite o nome do curso: ").toString();
 			String descricao = JOptionPane.showInputDialog("Digite a descriÃ§Ã£o do conteÃºdo: ").toString();
-			Double valor = Double.parseDouble(JOptionPane.showInputDialog("Digite o valor do curso: ").toString());
 			Integer limite = Integer.parseInt(JOptionPane.showInputDialog("Digite o limite de turmas: ").toString());
 			
-			Fachada.getInstance().alterarCurso(codigo, nome, descricao, valor, limite);	
+			Fachada.getInstance().alterarCurso(codigo, nome, descricao, limite);	
 		}		
 	}
 	
@@ -391,8 +389,8 @@ public class InterfaceUsuario {
 			
 			Date dataInicio = Date.valueOf(JOptionPane.showInputDialog("Digite o data de de inicio turma: ").toString());
 			Date dataTermino = Date.valueOf(JOptionPane.showInputDialog("Digite a data de termino: ").toString());
-			Time horaInicio = Time.valueOf(JOptionPane.showInputDialog("Digite a hora de inicio: ").toString());
-			Time horaTermino = Time.valueOf(JOptionPane.showInputDialog("Digite a hora de termino: ").toString());
+			Time horaInicio = Time.valueOf(JOptionPane.showInputDialog("Digite a hora de inicio: ").toString() + ":00");
+			Time horaTermino = Time.valueOf(JOptionPane.showInputDialog("Digite a hora de termino: ").toString() + ":00");
 			char turno = JOptionPane.showInputDialog("Digite (M)atutino, (V)espertino ou (N)oturno: ").toString().charAt(0);
 			Integer codigoProfessor = Integer.parseInt(JOptionPane.showInputDialog("Digite o cÃ³digo do professor: ").toString());
 			

@@ -20,7 +20,7 @@ public class ProfessorDAO {
 
 	public void cadastrar(Professor professor) {
 		String sql = "INSERT INTO Professor " +
-				"(cpf, nome, telefone, valorHora)" +
+				"(cpf, nome, telefone, valorHoraAula)" +
 				" VALUES (?,?,?,?)";
 
 		try {

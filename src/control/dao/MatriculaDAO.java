@@ -20,7 +20,7 @@ public class MatriculaDAO {
 	public void matricular (Matricula matricula){
 
 		String sql = "INSERT INTO Matricula " +
-				"(cpf, codigo, data, valorPago)" +
+				"(cpf, codigoTurma, data, valorPago)" +
 				" VALUES (?,?,?,?)";
 
 		try {
