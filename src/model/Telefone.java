@@ -8,7 +8,10 @@ public class Telefone {
 	private int cpf;
 	
 	public Telefone(int ddd, int numero, String tipo, int cpf) {
-		
+		this.ddd = ddd;
+		this.numero = numero;
+		this.tipo = tipo;
+		this.cpf = cpf;
 	}
 
 	public Integer getDdd() {

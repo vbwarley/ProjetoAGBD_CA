@@ -21,6 +21,17 @@ public class Aluno {
 	public Aluno(int cpf, String nome, String dataNascimento, String logradouro, int numero,
 			String complemento, String bairro, String cidade, int cep, String uf) {
 		
+		this.cpf = cpf;
+		this.nome = nome;
+		this.dataNascimento = Date.valueOf(dataNascimento);
+		this.logradouro = logradouro;
+		this.numero = numero;
+		this.complemento = complemento;
+		this.bairro = bairro;
+		this.cidade = cidade;
+		this.cep = cep;
+		this.UF = uf;
+		
 	}
 
 	public Integer getCpf() {
