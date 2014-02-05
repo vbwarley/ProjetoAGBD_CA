@@ -163,12 +163,26 @@ public class Fachada {
 
 		return aMostrar;
 	}
+	
+	public String consultarAlunos(Integer cpfP, Integer codT, char turnoDado, Integer codC) {
+		List<Aluno> alunos = new ArrayList<Aluno>();
 
+		alunos = new AlunoDAO().verAlunos(cpfP, codT, turnoDado, codC);
+
+		String aMostrar = "";
+
+		for (Aluno a : alunos) 
+			aMostrar += a.toString() + "\n\n----------------------\n\n";
+
+		return aMostrar;
+	}
+	
 	public void excluirAluno(Integer cpf) {
 		AlunoDAO adao = new AlunoDAO();
 		Aluno aluno = adao.consultar(cpf);
 		adao.excluir(aluno);
 	}
+	
 	
 	public void cadastrarTurma(Integer codigoCurso, Date dataInicio, Date dataTermino,
 			Time horaInicio, Time horaTermino, char turno, Integer codigoProfessor) {

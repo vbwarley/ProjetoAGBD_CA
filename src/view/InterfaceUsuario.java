@@ -54,6 +54,7 @@ public class InterfaceUsuario {
 				+ "\n2. Alterar"
 				+ "\n3. Consultar"
 				+ "\n4. Excluir"
+				+ "\n5. Ver alunos (consulta especial)"
 				+ "\n0. Voltar...\n\n").toString());
 		
 		switch (opcao) {
@@ -73,6 +74,9 @@ public class InterfaceUsuario {
 			excluirAluno();
 			manterAluno();
 			break;
+		case 5:
+			verAlunos();
+			manterAluno();
 		case 0:
 			menu();
 		default:
@@ -255,7 +259,7 @@ public class InterfaceUsuario {
 			JOptionPane.showMessageDialog(null, "Não há alunos cadastrados.");
 		else
 			JOptionPane.showMessageDialog(null, alunos);
-	}
+	}	
 	
 	public static void matricularAluno(){
 		
@@ -286,21 +290,39 @@ public class InterfaceUsuario {
 				+ "\n\nDigite o código: ").toString());
 		if (Fachada.getInstance().consultarAluno(cpf)){
 			Fachada.getInstance().excluirAluno(cpf);
-			JOptionPane.showMessageDialog(null, "Aluno exclu�do com sucesso");
+			JOptionPane.showMessageDialog(null, "Aluno excluído com sucesso");
 		} else {
 			JOptionPane.showMessageDialog(null, "Professor inexistente");
 		}
 	}
+	
+	public static void verAlunos() {
+		JOptionPane.showMessageDialog(null, "A consulta a ser feita seleciona os alunos que estudam com professor, na turma, no turno e no curso que você digitará");
 		
-	public static void verTotalArrecadado() {
-		JOptionPane.showMessageDialog(null, "Ao clicar OK, você poderá ver o total arreacadado de todos os cursos.");
+		int opcao = JOptionPane.NO_OPTION;
 		
-		Double total = Fachada.getInstance().totalArrecadado();
-		if (total != null)
-			JOptionPane.showMessageDialog(null, "Total arrecadado: " + total);
-		else
-			JOptionPane.showMessageDialog(null, "Não foi possível calcular o total. Provavelmente nenhum aluno foi matriculado.");
+		do {
+
+			Integer cpfP = Integer.parseInt(JOptionPane.showInputDialog("Digite o código do professor: " ).toString());
+			Integer codT = Integer.parseInt(JOptionPane.showInputDialog("Digite o código da turma: " ).toString());
+			char turnoDado = JOptionPane.showInputDialog("Digite o turno da turma (M, V ou N): " ).toString().charAt(0); 
+			Integer codC = Integer.parseInt(JOptionPane.showInputDialog("Digite o código do curso: " ).toString());
+
+			boolean turnoValido;
+			if (turnoDado != 'M' && turnoDado != 'V' && turnoDado != 'N')
+				turnoValido = false;
+			else
+				turnoValido = true;
+
+			if (Fachada.getInstance().consultarProfessor(cpfP) == false || Fachada.getInstance().consultarTurma(codT) == false || turnoValido == false || Fachada.getInstance().consultarCurso(codC))
+				JOptionPane.showMessageDialog(null, Fachada.getInstance().consultarAlunos(cpfP, codT, turnoDado, codC));
+			else
+				opcao = JOptionPane.showConfirmDialog(null, "Algum(ns) dado(s) são inválidos.\nDeseja tentar novamente?");
+
+		} while (opcao == JOptionPane.YES_OPTION);
 	}
+		
+	
 	
 	public static void cadastrarProfessor() {
 		JOptionPane.showMessageDialog(null,"Para cadastrar um professor você deve preencher os campos que aparecerão a seguir.");
@@ -393,6 +415,16 @@ public class InterfaceUsuario {
 				+ "\n\nDigite o código: ").toString());
 		
 		Fachada.getInstance().excluirCurso(codigo);
+	}
+	
+	public static void verTotalArrecadado() {
+		JOptionPane.showMessageDialog(null, "Ao clicar OK, você poderá ver o total arreacadado de todos os cursos.");
+		
+		Double total = Fachada.getInstance().totalArrecadado();
+		if (total != null)
+			JOptionPane.showMessageDialog(null, "Total arrecadado: " + total);
+		else
+			JOptionPane.showMessageDialog(null, "Não foi possível calcular o total. Provavelmente nenhum aluno foi matriculado.");
 	}
 	
 	public static void cadastrarTurma() {

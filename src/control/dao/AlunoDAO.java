@@ -1,9 +1,12 @@
 package control.dao;
 
+import java.sql.Array;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -137,5 +140,31 @@ public class AlunoDAO {
 		}
 	}
 
-	
+	public List<Aluno> verAlunos(Integer cpfP, Integer codT, char turnoDado, Integer codC) {
+		
+		try {
+			CallableStatement cs = connection.prepareCall("{call verAlunos(?,?,?,?)}");
+//			cs.registerOutParameter(1, Types.INTEGER);
+			cs.setInt(1, cpfP);
+			cs.setInt(2, codT);
+			cs.setString(3, String.valueOf(turnoDado));
+			cs.setInt(4, codC);
+			
+			cs.executeQuery();
+			
+			ResultSet rs = cs.getResultSet();
+			
+			List<Aluno> alunos = new ArrayList<Aluno>();
+			
+			while (rs.next()) 
+				alunos.add(consultar(rs.getInt(1)));
+			
+			
+			rs.close();
+			cs.close();
+			return alunos;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }
