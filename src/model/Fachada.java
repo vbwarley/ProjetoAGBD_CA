@@ -32,6 +32,11 @@ public class Fachada {
 		return new CursoDAO().consultar(codigo) == null ? false : true;
 	}
 	
+	public boolean verLimite(Integer codigo) {
+		Curso c = new CursoDAO().consultar(codigo);
+		return (c == null) ? false : (c.getLimite() == c.getTurmas().size()) ? false : true;
+	}
+	
 	public boolean consultarProfessor(Integer cpf) {
 		return new ProfessorDAO().consultar(cpf) == null ? false : true;
 	}
@@ -117,6 +122,11 @@ public class Fachada {
 		new AlunoDAO().cadastrar(aluno);
 		
 	}
+	
+	public Double totalArrecadado() {
+		return new CursoDAO().totalArrecadado();
+	}
+	
 	
 	public void alterarAluno(int cpf, String nome, String dataNascimento, int dddTelefone, int telefoneNumero, String tipo, String logradouro, int numero,
 			String complemento, String bairro, String cidade, int cep, String uf) {

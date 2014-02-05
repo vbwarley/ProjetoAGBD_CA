@@ -90,6 +90,7 @@ public class InterfaceUsuario {
 				+ "\n2. Alterar"
 				+ "\n3. Consultar"
 				+ "\n4. Excluir"
+				+ "\n5. Ver total arrecadado"
 				+ "\n0. Voltar...\n\n").toString());
 		
 		switch (opcao) {
@@ -109,6 +110,9 @@ public class InterfaceUsuario {
 			excluirCurso();
 			manterCurso();
 			break;
+		case 5:
+			verTotalArrecadado();
+			manterCurso();
 		case 0:
 			menu();
 		default:
@@ -117,7 +121,8 @@ public class InterfaceUsuario {
 			break;
 		}
 	}
-	
+
+
 	public static void manterProfessor() {
 		int opcao = Integer.parseInt(JOptionPane.showInputDialog(null, "\tMenu Manter Professor\t."
 				+ "\n\nPor favor, selecione alguma das opções abaixo: "
@@ -287,6 +292,16 @@ public class InterfaceUsuario {
 		}
 	}
 		
+	public static void verTotalArrecadado() {
+		JOptionPane.showMessageDialog(null, "Ao clicar OK, você poderá ver o total arreacadado de todos os cursos.");
+		
+		Double total = Fachada.getInstance().totalArrecadado();
+		if (total != null)
+			JOptionPane.showMessageDialog(null, "Total arrecadado: " + total);
+		else
+			JOptionPane.showMessageDialog(null, "Não foi possível calcular o total. Provavelmente nenhum aluno foi matriculado.");
+	}
+	
 	public static void cadastrarProfessor() {
 		JOptionPane.showMessageDialog(null,"Para cadastrar um professor você deve preencher os campos que aparecerão a seguir.");
 		
@@ -385,7 +400,7 @@ public class InterfaceUsuario {
 		
 		Integer codigoCurso = Integer.parseInt(JOptionPane.showInputDialog("Digite o código do curso: ").toString());
 		
-		if (Fachada.getInstance().consultarCurso(codigoCurso)) {
+		if (Fachada.getInstance().consultarCurso(codigoCurso) && Fachada.getInstance().verLimite(codigoCurso) ) {
 			
 			Date dataInicio = Date.valueOf(JOptionPane.showInputDialog("Digite o data de de inicio turma: ").toString());
 			Date dataTermino = Date.valueOf(JOptionPane.showInputDialog("Digite a data de termino: ").toString());
@@ -400,7 +415,7 @@ public class InterfaceUsuario {
 			Fachada.getInstance().cadastrarTurma(codigoCurso, dataInicio, dataTermino, horaInicio, horaTermino, turno, codigoProfessor);
 			
 		} else
-			JOptionPane.showMessageDialog(null, "Curso inexistente!");
+			JOptionPane.showMessageDialog(null, "Curso inexistente ou limite de turmas completo!");
 		
 		
 	}

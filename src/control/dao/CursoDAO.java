@@ -1,5 +1,6 @@
 package control.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,8 +19,7 @@ public class CursoDAO {
 	public CursoDAO() {
 		this.connection = new ConnectionFactory().getConnection();
 	}
-	
-	
+		
 	public void cadastrar(Curso curso) {
 		String sql = "INSERT INTO Curso " +
 				"(nome, descricaoConteudo, valor, limite)" +
@@ -141,6 +141,24 @@ public class CursoDAO {
 			rs.close();
 			stmt.close();
 			return cursos;			
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
+	public Double totalArrecadado() {
+		
+		try {
+			CallableStatement cs = connection.prepareCall("{call totalArrecadado()}");
+			
+			cs.executeQuery();
+			
+			ResultSet rs = cs.getResultSet();
+			
+			if (rs.next())
+				return rs.getDouble(1);
+			else
+				return null;
 		} catch (SQLException e) {
 			throw new RuntimeException(e);
 		}
