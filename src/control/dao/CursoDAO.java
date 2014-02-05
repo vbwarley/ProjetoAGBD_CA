@@ -132,7 +132,7 @@ public class CursoDAO {
 				curso.setLimite(rs.getInt("limite"));
 				
 				for (Turma t: turmas)
-					if (curso.equals(t.getCurso()))
+					if (curso.getCodigo() == t.getCurso().getCodigo())
 						curso.getTurmas().add(t);
 				
 				cursos.add(curso);

@@ -49,8 +49,7 @@ public class Fachada {
 		String pmostrar = "";
 
 		for (Professor p : professores) 
-			pmostrar += p.toString();
-			pmostrar += "\n\n-------------------\n\n";
+			pmostrar += p.toString() + "\n\n-------------------\n\n";
 
 		return pmostrar;
 	}
@@ -73,12 +72,13 @@ public class Fachada {
 		List<Turma> turmas = new ArrayList<Turma>();
 
 		cursos = new CursoDAO().consultar();
-		turmas = new TurmaDAO().consultar();
+		
 
 		String cmostrar = "";
 
-		for (Curso c : cursos) 
+		for (Curso c : cursos) {
 			cmostrar += c.toString();
+			turmas = c.getTurmas();		
 			// se existir alguma turma
 			if (turmas != null)
 				for (Turma t : turmas) {
@@ -95,7 +95,7 @@ public class Fachada {
 			else
 				cmostrar += 0;
 			cmostrar += "\n\n-------------------\n\n";
-
+		}
 		return cmostrar;
 	}
 
@@ -153,13 +153,32 @@ public class Fachada {
 	
 	public String consultarAlunos() {
 		List<Aluno> alunos = new ArrayList<Aluno>();
-
+		List<Turma> turmas = new ArrayList<Turma>();
+		
 		alunos = new AlunoDAO().consultar();
-
+		
 		String aMostrar = "";
 
-		for (Aluno a : alunos) 
-			aMostrar += a.toString() + "\n\n----------------------\n\n";
+		for (Aluno a : alunos)  {
+			aMostrar += a.toString();
+			turmas = a.getTurma();
+			// se existir alguma turma
+			if (turmas != null)
+				for (Turma t : turmas) {
+					// adicione o codigo dela na String cmostrar
+					aMostrar += t.getCodigo();
+					// se a turma for a penultima adicione 'e', senão adicione ',' || +1 serve pra igualar as posicoes
+					// pq turmas começa no indice 0
+					if (turmas.lastIndexOf(t)+1 == turmas.size() - 1) 
+						aMostrar += " e ";
+					// verifica se a turma não é a última
+					else if (!(turmas.lastIndexOf(t)+1 == turmas.size()))
+						aMostrar += ", "; // se não for, adiciona a vírgula					
+				}
+			 else
+				aMostrar += 0;
+			aMostrar += "\n\n-------------------\n\n";
+		}
 
 		return aMostrar;
 	}
@@ -210,15 +229,16 @@ public class Fachada {
 		return new TurmaDAO().consultar(codigo) == null ? false : true;
 	}
 
-	public String consultarTurmas() {
+	public List<String> consultarTurmas() {
 		List<Turma> turmas = new ArrayList<Turma>();
 
 		turmas = new TurmaDAO().consultar();
 
-		String tmostrar = "";
+		List<String> tmostrar = new ArrayList<String>();
 
 		for (Turma t : turmas) 
-			tmostrar += t.toString() + "\n\n----------------------\n\n";
+//			tmostrar += t.toString() + "\n\n----------------------\n\n";
+			tmostrar.add(t.toString());
 
 		return tmostrar;
 	}

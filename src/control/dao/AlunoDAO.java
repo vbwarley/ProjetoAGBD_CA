@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Aluno;
+import model.Turma;
 import control.dao.banco.ConnectionFactory;
 
 public class AlunoDAO {
@@ -63,6 +64,10 @@ public class AlunoDAO {
 			if (rs.next()) { //Lembrar de ajeitar o telefone
 				Aluno aluno = new Aluno(cpf, rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getString(10));
 				aluno.setTelefone(new TelefoneDAO().consultar(rs.getInt(1)));
+
+				aluno.setTurma(new MatriculaDAO().consultarMatricula(cpf));
+								
+				rs.close();
 				stmt.close();
 				return aluno;
 			} else 
@@ -91,6 +96,7 @@ public class AlunoDAO {
 			stmt.setString(9, aluno.getUF());
 			stmt.setInt(10, aluno.getCpf());
 			
+					
 			stmt.execute();
 			stmt.close();
 			
@@ -113,6 +119,7 @@ public class AlunoDAO {
 					Aluno aluno = new Aluno(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getString(6), rs.getString(7), rs.getString(8), rs.getInt(9), rs.getString(10));
 				
 					aluno.setTelefone(new TelefoneDAO().consultar(rs.getInt(1)));
+					aluno.setTurma(new MatriculaDAO().consultarMatricula(aluno.getCpf()));
 					
 					alunos.add(aluno);
 				}
@@ -144,7 +151,6 @@ public class AlunoDAO {
 		
 		try {
 			CallableStatement cs = connection.prepareCall("{call verAlunos(?,?,?,?)}");
-//			cs.registerOutParameter(1, Types.INTEGER);
 			cs.setInt(1, cpfP);
 			cs.setInt(2, codT);
 			cs.setString(3, String.valueOf(turnoDado));

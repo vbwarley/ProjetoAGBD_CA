@@ -1,10 +1,15 @@
 package control.dao;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Matricula;
+import model.Turma;
 import control.dao.banco.ConnectionFactory;
 
 public class MatriculaDAO {
@@ -38,6 +43,31 @@ public class MatriculaDAO {
 			throw new RuntimeException(e);
 		}
 
-	}	
-
+	}
+	
+	public List<Turma> consultarMatricula(Integer cpfA) {
+		
+		try {
+			List<Turma> turmas = new ArrayList<Turma>();
+			
+			CallableStatement cs = connection.prepareCall("{call verTurmaAluno(?)}");
+			
+			cs.setInt(1, cpfA);
+			
+			cs.executeQuery();
+			
+			ResultSet rs = cs.getResultSet();
+			
+			while (rs.next()) {
+				Turma turma = new TurmaDAO().consultar(rs.getInt(1));
+				turmas.add(turma);
+			}
+			
+			cs.close();
+			rs.close();
+			return turmas;
+		} catch (SQLException e) {
+			throw new RuntimeException(e);
+		}
+	}
 }

@@ -143,7 +143,7 @@ public class TurmaDAO {
 				turma.setDataFim(rs.getDate("dataTermino"));
 				turma.setHoraInicio(rs.getTime("horaInicio"));
 				turma.setHoraTermino(rs.getTime("dataTermino"));
-				turma.setProfessor(new ProfessorDAO().consultar(rs.getInt("codigo")));
+				turma.setProfessor(new ProfessorDAO().consultar(rs.getInt("cpfProfessor")));
 				turma.setTurno(rs.getString("turno").toString().charAt(0));
 
 				turmas.add(turma);

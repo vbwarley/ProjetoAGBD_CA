@@ -1,5 +1,6 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Curso {
@@ -9,7 +10,7 @@ public class Curso {
 	private String descricaoConteudo;
 	private Double valor = 0.0;
 	private Integer limite;
-	private List<Turma> turmas;
+	private List<Turma> turmas = new ArrayList<Turma>();
 	
 	public Curso() {
 

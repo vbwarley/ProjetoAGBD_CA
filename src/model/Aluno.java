@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Aluno {
@@ -14,8 +15,8 @@ public class Aluno {
 	private Integer cep;
 	private String cidade;
 	private String UF;
-	private List<Telefone> telefone;
-	private Turma turma;
+	private List<Telefone> telefone = new ArrayList<Telefone>();
+	private List<Turma> turmas = new ArrayList<Turma>();
 	
 	public Aluno(int cpf, String nome, String dataNascimento, String logradouro, int numero,
 			String complemento, String bairro, String cidade, int cep, String uf) {
@@ -113,12 +114,12 @@ public class Aluno {
 		this.telefone = telefone;
 	}
 
-	public Turma getTurma() {
-		return turma;
+	public List<Turma> getTurma() {
+		return turmas;
 	}
 
-	public void setTurma(Turma turma) {
-		this.turma = turma;
+	public void setTurma(List<Turma> turma) {
+		this.turmas = turma;
 	}
 
 	public Integer getCep() {
@@ -145,7 +146,7 @@ public class Aluno {
 		+ this.dataNascimento	+ "\nLogradouro: " + this.logradouro + "\nNumero: " 
 		+ this.numero + "\nComplemento: " + this.complemento + "\nBairro: "	+ this.bairro 
 		+ "\nCEP: "	+ this.cep + "\nCidade: " + this.cidade + "\nUF: " + "" + this.UF 
-		+ "\nTelefones: " + numeros + "\nTurma: " + this.turma;
+		+ "\nTelefones: " + numeros + "\nCódigo das turmas: ";
 		
 		return info;
 	
